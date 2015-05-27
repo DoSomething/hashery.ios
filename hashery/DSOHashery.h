@@ -24,4 +24,6 @@
 
 - (NSInteger)decodeUniqueStringToBase10:(NSString*)val;
 
++ (id)sharedHashery;
+
 @end

@@ -21,6 +21,26 @@
 
 @implementation DSOHashery
 
+/**
+ * Returns the singleton instance of DSOHashery.
+ *
+ * @return NSInteger
+ */
++ (id)sharedHashery {
+    // Defines static variable hashery which is initialized only once.
+    static DSOHashery *hashery = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        hashery = [[self alloc] init];
+    });
+    return hashery;
+}
+
+/**
+ * Sets the arrays of words used for producing the hash.
+ *
+ * @return BOOL
+ */
 - (BOOL)setWordArrayLists:(NSArray *)wordArrayLists
 {
     if (!wordArrayLists || !wordArrayLists.count) {
@@ -57,7 +77,7 @@
 }
 
 /**
- * Returns max possible value that can be decoded given the nested list of words provided in the ctor.
+ * Returns max possible value that can be decoded given the nested list of words provided.
  *
  * @return NSInteger
  */
