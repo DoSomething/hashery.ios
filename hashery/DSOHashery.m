@@ -24,7 +24,7 @@
 - (BOOL)setWordArrayLists:(NSArray *)wordArrayLists
 {
     if (!wordArrayLists || !wordArrayLists.count) {
-        NSAssert(false, @"setWordArrayLists must be passed a valid array of arrays containing hash words.");
+        NSAssert(NO, @"setWordArrayLists must be passed a valid array of arrays containing hash words.");
     }
     
     NSInteger testSize = 0;
@@ -34,11 +34,11 @@
         if (i == 0) {
             testSize = arrayIndex.count;
             if (testSize == 0) {
-                NSAssert(false, @"setWordArrayLists must be passed a valid array of arrays containing hash words.");
+                NSAssert(NO, @"setWordArrayLists must be passed a valid array of arrays containing hash words.");
             }
         }
         else if (testSize != arrayIndex.count) {
-            NSAssert(false, @"setWordArrayLists must be passed an array of arrays of equal length.");
+            NSAssert(NO, @"setWordArrayLists must be passed an array of arrays of equal length.");
         }
     }
     
@@ -53,7 +53,7 @@
     }
     _maxIntegerValueOfHash = base - 1;
     NSLog(@"_maxIntegerValueOfHash: %zd", _maxIntegerValueOfHash);
-    return true;
+    return YES;
 }
 
 /**
@@ -150,7 +150,7 @@
     NSString *encoded = val;
     
     while ([encoded length] > 0) {
-        BOOL matchFound = false;
+        BOOL matchFound = NO;
         
         // If text still remains and all word arrays have been gone through, then it's invalid.
         if (matchesFound >= [_words count]) {
@@ -161,7 +161,7 @@
         for (NSInteger i = 0; i < [words count] && !matchFound; i++) {
             NSString *word = [words objectAtIndex:i];
             if ([encoded rangeOfString:word].location == 0) { // Looping through the word list to see if that word is present within encoded. If it's at index 0, that word is first.
-                matchFound = true;
+                matchFound = YES;
                 [baseN addObject:@(i)]; // Converting i, a native value, to an object, and adding it to baseN
                 matchesFound++; // Increment to move on to next _words item
                 

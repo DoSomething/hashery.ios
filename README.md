@@ -4,45 +4,36 @@ This is an Objective-C library that converts numbers into human-readable word co
 
 #### Get the library
 
-- Download the latest release: https://github.com/DoSomething/hashery.android/releases
-- Add the `hashery.jar` file to your project's libs folder
-
 #### How to use it
 
 - Create sets of words. These are not provided to you by the library.
 
+Creates an array of arrays. The number of arrays within the array becomes the number of words in the hash string. Each array needs to have the same number of words. 
 ```
-String[] words0 = {"Tiny", "Medium", "Big"};
-ArrayList<String> aWords0 = new ArrayList<String>(Arrays.asList(words0));
-
-String[] words1 = {"Red", "Green", "Blue"};
-ArrayList<String> aWords1 = new ArrayList<String>(Arrays.asList(words1));
-
-String[] words2 = {"Chicken", "Goat", "Pig};
-ArrayList<String> aWords2 = new ArrayList<String>(Arrays.asList(words2));
-
-ArrayList<ArrayList<String>> allWords = new ArrayList<ArrayList<String>>();
-allWords.add(aWords0);
-allWords.add(aWords1);
-allWords.add(aWords2);
+        NSArray *wordArray = @[
+            @[@"big", @"tall", @"short", @"husky"],
+            @[@"orange", @"grey", @"purple", @"vermilion"],
+            @[@"monkey", @"sloth", @"giraffe", @"dolphin"]
+        ];
 ```
 
-- Instantiate a Hashery object.
-
+Instantiates a hashery object. 
 ```
-Hashery hashery = new Hashery(allWords);
-```
-
-- Encode numbers into word combinations.
-
-```
-String encoded = hashery.encode(someNumber);
+        DSOHashery *hashery = [[DSOHashery alloc] init];
 ```
 
-- Decode word combinations back into the original numbers.
-
+Sets the hashery object to use the wordArray. 
 ```
-int decoded = hashery.decode(encodedString);
+        [hashery setWordArrayLists:wordArray];
 ```
 
+Encodes `13` into a unique string. 
+```    
+        [hashery encodeBase10ToUniqueString:13];
+```
+
+Decodes a unique string into an integer. 
+```    
+        [hashery decodeUniqueStringToBase10:@"bigvermilionsloth"];
+```
 ---
